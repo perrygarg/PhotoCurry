@@ -6,8 +6,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.tsystems.photocurry.R;
 import com.tsystems.photocurry.common.activity.BaseActivity;
+import com.tsystems.photocurry.home.contract.HomeContract;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements HomeContract.View {
     private String TAG = HomeActivity.class.getSimpleName();
     private RecyclerView imagesRecView;
     private ProgressDialog progressDialog;
@@ -43,5 +44,25 @@ public class HomeActivity extends BaseActivity {
     private void configureToolbar() {
         setupToolbar(getString(R.string.app_name), false);
         setToolbarBackgroundColor();
+    }
+
+    @Override
+    public void showProgress(int processCode) {
+
+    }
+
+    @Override
+    public void hideProgress(int processCode) {
+
+    }
+
+    @Override
+    public void showError(String errMsg) {
+
+    }
+
+    @Override
+    public void showSnackBarMessage(String msg) {
+
     }
 }
