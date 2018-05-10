@@ -9,4 +9,6 @@
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <include layout="@layout/images_list_layout" />
+
 </android.support.constraint.ConstraintLayout>
