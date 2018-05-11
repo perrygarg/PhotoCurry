@@ -28,6 +28,8 @@ public interface WebConstants {
 
     String API_ERROR = "API key has expired. Please contact developer.";
 
+    String OK = "ok";
+
     /**
      * Web Service Task Codes
      */

@@ -46,10 +46,12 @@ public interface HomeContract {
     interface Presenter {
 
         /**
-         * Method used to call API to fetch images with a specific query text
-         * @param queryText Query text
+         * Method used to call API to fetch images with a specific query text and on Pagination/scrolling recycler view
+         * @param pageNumber Page number
+         * @param photosPerPage Photos per page
+         * @param queryText Query Text
          */
-        void fetchPhotosWithQuery(String queryText);
+        void fetchPhotosWithQuery(int pageNumber, int photosPerPage, String queryText);
 
     }
 

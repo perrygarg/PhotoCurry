@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -151,7 +152,14 @@ public class UIUtil {
      */
     public static ProgressDialog showProgressDialog(Context context, String title, String message, boolean isInDeterminent, boolean isCancelable)
     {
-        return (ProgressDialog.show(context, title, message, isInDeterminent, isCancelable));
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(message);
+        progressDialog.setIndeterminate(isInDeterminent);
+        progressDialog.setCancelable(isCancelable);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        return progressDialog;
     }
 
     /**
@@ -199,6 +207,7 @@ public class UIUtil {
             duration = Snackbar.LENGTH_LONG;
 
         Snackbar snackbar = Snackbar.make(view, message, duration);
+        snackbar.getView().setBackgroundColor(Color.WHITE);
         snackbar.show();
         return snackbar;
     }

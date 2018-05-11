@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.tsystems.photocurry.R;
 import com.tsystems.photocurry.application.MyApplication;
+import com.tsystems.photocurry.common.constants.AppConstants;
+import com.tsystems.photocurry.common.util.AppLogs;
 
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
@@ -20,9 +22,6 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     private int count = 0;
     private boolean isLoadMore = true;
     private boolean isPagination = true;
-
-    private final int ITEM_PROGRESS_SHOWN = 100;
-    private final int ITEM_ERROR_SHOWN = 101;
 
     protected BaseRecyclerAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, boolean isPagination)
     {
@@ -37,7 +36,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         RecyclerView.ViewHolder viewHolder = null;
 
         switch (viewType) {
-            case ITEM_PROGRESS_SHOWN:
+            case AppConstants.ITEM_PROGRESS_SHOWN:
 
                 View view = layoutInflater.inflate(R.layout.progress_layout, parent, false);
                 viewHolder = new ViewHolderProgressItem(view);
@@ -56,7 +55,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
         switch (viewType)
         {
-            case ITEM_PROGRESS_SHOWN:
+            case AppConstants.ITEM_PROGRESS_SHOWN:
                 displayProgress(holder, position);
                 break;
         }
@@ -66,9 +65,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     private void displayProgress(RecyclerView.ViewHolder holder, int position)
     {
 //        if(isLoadMore) {
-            if (count < total) {
-
-                ViewHolderProgressItem viewHolderProgressItem = (ViewHolderProgressItem) holder;
+        AppLogs.d("perryg", count + "," + total);
+        ViewHolderProgressItem viewHolderProgressItem = (ViewHolderProgressItem) holder;
+            if (count < total - 1) { //Flickr API sometimes return 1 or 2 photos less than 'total'
 
                 if (position < total)
                 {
@@ -90,8 +89,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                 }
                 else
                 {
-                    viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.INVISIBLE);
+                    viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.GONE);
                 }
+            } else {
+                viewHolderProgressItem.relativeLayoutBottom.setVisibility(View.GONE);
             }
 //        }
 //        else
@@ -134,7 +135,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
         if((position + 1) == count && isPagination)
         {
-            return ITEM_PROGRESS_SHOWN;
+            return AppConstants.ITEM_PROGRESS_SHOWN;
         }
 
         return getViewType(position);

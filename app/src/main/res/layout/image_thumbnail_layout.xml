@@ -2,7 +2,7 @@
 <com.tsystems.photocurry.common.util.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/white_horiontal_divider_footer"
     android:orientation="vertical">
 
     <ImageView
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:layout_margin="1dp"
+        android:layout_margin="0dp"
         android:scaleType="centerCrop" />
 
 </com.tsystems.photocurry.common.util.SquareLayout>

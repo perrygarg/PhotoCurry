@@ -8,6 +8,7 @@ import com.tsystems.photocurry.common.network.WebManager;
 import com.tsystems.photocurry.common.network.WebService;
 import com.tsystems.photocurry.common.network.WebServiceListener;
 import com.tsystems.photocurry.home.model.SearchPhotoResponse;
+import com.tsystems.photocurry.home.model.SearchRequest;
 
 /**
  * Created by PerryGarg on 11-05-2018.
@@ -21,9 +22,9 @@ public class FetchQueryImagesService extends WebService {
 
     @Override
     public void getData(Object... args) {
-        String queryText = (String) args[0];
+        SearchRequest request = (SearchRequest) args[0];
 
-        String endpoint = WebConstants.URL_FETCH_QUERY_IMAGES_1 + queryText + WebConstants.URL_FETCH_QUERY_IMAGES_2 + "1" + WebConstants.URL_FETCH_QUERY_IMAGES_3 + "12" + WebConstants.URL_FETCH_QUERY_IMAGES_4;
+        String endpoint = WebConstants.URL_FETCH_QUERY_IMAGES_1 + request.queryText + WebConstants.URL_FETCH_QUERY_IMAGES_2 + request.pageNumber + WebConstants.URL_FETCH_QUERY_IMAGES_3 + request.photosPerPage + WebConstants.URL_FETCH_QUERY_IMAGES_4;
         AppHttpClient client = new AppHttpClient(MyApplication.appContext);
         client.sendGSONRequest(Request.Method.GET, endpoint, null, SearchPhotoResponse.class, WebManager.getHeaders(), this, this, tag);
     }
@@ -32,7 +33,7 @@ public class FetchQueryImagesService extends WebService {
     public void onResponse(Object object) {
         SearchPhotoResponse response = (SearchPhotoResponse) object;
 
-        if(response.status.equals("ok")) {
+        if(response.status.equals(WebConstants.OK)) {
             serviceListener.onServiceSuccess(response, taskCode);
         } else {
             serviceListener.onServiceError(WebConstants.API_ERROR, taskCode, 0);

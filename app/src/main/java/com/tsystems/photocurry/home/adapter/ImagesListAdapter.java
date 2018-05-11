@@ -13,6 +13,7 @@ import com.tsystems.photocurry.R;
 import com.tsystems.photocurry.application.MyApplication;
 import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapter;
 import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapterListener;
+import com.tsystems.photocurry.common.constants.AppConstants;
 import com.tsystems.photocurry.common.util.AppLogs;
 import com.tsystems.photocurry.home.model.Image;
 
@@ -26,7 +27,6 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
     private List<Image> images;
     private Context mContext;
     private LayoutInflater layoutInflater = null;
-    private final int ITEM_SEARCH_IMAGE = 1;
 
     public ImagesListAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, Context context, List<Image> images) {
         super(baseRecyclerAdapterListener, true);
@@ -50,7 +50,7 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
 
         switch (viewType)
         {
-            case ITEM_SEARCH_IMAGE:
+            case AppConstants.ITEM_SEARCH_IMAGE:
                 View view = layoutInflater.inflate(R.layout.image_thumbnail_layout, parent, false);
                 viewHolder = new MyViewHolder(view);
 
@@ -69,7 +69,7 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
 
         switch (viewType)
         {
-            case ITEM_SEARCH_IMAGE:
+            case AppConstants.ITEM_SEARCH_IMAGE:
 
                 Image image = images.get(position);
 
@@ -96,6 +96,6 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
 
     @Override
     protected int getViewType(int position) {
-        return ITEM_SEARCH_IMAGE;
+        return AppConstants.ITEM_SEARCH_IMAGE;
     }
 }

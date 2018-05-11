@@ -12,6 +12,9 @@
         <item name="android:textColorPrimary">@color/primaryColor</item>
 
         <item name="android:progressBarStyle">@color/colorPrimary</item>
+
+        <item name="android:itemBackground">@color/white</item>
+        <item name="android:itemTextAppearance">@color/primaryColor</item>
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
