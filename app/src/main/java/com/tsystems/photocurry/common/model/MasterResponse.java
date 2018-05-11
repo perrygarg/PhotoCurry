@@ -3,12 +3,16 @@ package com.tsystems.photocurry.common.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by perry.garg on 30/01/17.
+ * Created by PerryGarg on 10/05/18.
  */
 
+/**
+ * Master response for Flickr APIs
+ * Uses GSON for JSON parsing into java models
+ */
 public class MasterResponse {
 
-    @SerializedName("response_code")
-    public int responseCode;
+    @SerializedName("stat")
+    public String status;
 
 }

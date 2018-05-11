@@ -10,6 +10,8 @@
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textColorSecondary">@color/secondaryText</item>
         <item name="android:textColorPrimary">@color/primaryColor</item>
+
+        <item name="android:progressBarStyle">@color/colorPrimary</item>
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">

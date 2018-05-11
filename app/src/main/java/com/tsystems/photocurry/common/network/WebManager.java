@@ -1,6 +1,7 @@
 package com.tsystems.photocurry.common.network;
 
 import com.tsystems.photocurry.application.MyApplication;
+import com.tsystems.photocurry.home.service.FetchQueryImagesService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,8 @@ public class WebManager {
     {
         switch (taskCode)
         {
-
+            case WebConstants.WS_QUERY_IMAGE_SERVICE:
+                return new FetchQueryImagesService(taskCode, serviceListener);
         }
 
         return null;

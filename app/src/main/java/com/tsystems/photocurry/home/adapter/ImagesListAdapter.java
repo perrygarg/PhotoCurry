@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tsystems.photocurry.R;
+import com.tsystems.photocurry.application.MyApplication;
+import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapter;
+import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapterListener;
+import com.tsystems.photocurry.common.util.AppLogs;
 import com.tsystems.photocurry.home.model.Image;
 
 import java.util.List;
@@ -18,45 +22,80 @@ import java.util.List;
  * Created by PerryGarg on 10-05-2018.
  */
 
-public class ImagesListAdapter extends RecyclerView.Adapter<ImagesListAdapter.MyViewHolder> {
+public class ImagesListAdapter extends BaseRecyclerAdapter {
     private List<Image> images;
     private Context mContext;
+    private LayoutInflater layoutInflater = null;
+    private final int ITEM_SEARCH_IMAGE = 1;
+
+    public ImagesListAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, Context context, List<Image> images) {
+        super(baseRecyclerAdapterListener, true);
+        mContext = context;
+        this.images = images;
+        layoutInflater = (LayoutInflater) MyApplication.appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnail;
 
         public MyViewHolder(View view) {
             super(view);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            thumbnail = view.findViewById(R.id.thumbnail);
         }
     }
 
-    public ImagesListAdapter(Context context, List<Image> images) {
-        mContext = context;
-        this.images = images;
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder viewHolder = null;
+
+        switch (viewType)
+        {
+            case ITEM_SEARCH_IMAGE:
+                View view = layoutInflater.inflate(R.layout.image_thumbnail_layout, parent, false);
+                viewHolder = new MyViewHolder(view);
+
+                break;
+
+            default:
+                viewHolder = super.onCreateViewHolder(parent, viewType);
+                break;
+        }
+        return viewHolder;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.image_thumbnail_layout, parent, false);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        int viewType = getItemViewType(position);
 
-        return new MyViewHolder(itemView);
+        switch (viewType)
+        {
+            case ITEM_SEARCH_IMAGE:
+
+                Image image = images.get(position);
+
+                MyViewHolder myHolder = (MyViewHolder) holder;
+
+                Glide.with(mContext).load(image.getMediumSizeUrl())
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(myHolder.thumbnail);
+                break;
+
+            default:
+
+                super.onBindViewHolder(holder, position);
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Image image = images.get(position);
-
-        Glide.with(mContext).load(image.getSmallVersionUrl())
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.thumbnail);
-    }
-
-    @Override
-    public int getItemCount() {
+    protected int getCount() {
         return images.size();
+    }
+
+    @Override
+    protected int getViewType(int position) {
+        return ITEM_SEARCH_IMAGE;
     }
 }
