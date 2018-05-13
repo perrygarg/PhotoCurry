@@ -79,6 +79,7 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        //Dev comment: App might get crashed very intermittently while scrolling due to a known bug of Recycler View: https://issuetracker.google.com/issues/37007605#c10
         int viewType = getItemViewType(position);
 
         switch (viewType)
