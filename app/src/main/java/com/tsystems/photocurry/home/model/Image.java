@@ -1,6 +1,7 @@
 package com.tsystems.photocurry.home.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.tsystems.photocurry.common.constants.AppConstants;
 import com.tsystems.photocurry.common.network.WebConstants;
 
 import java.io.Serializable;
@@ -10,22 +11,22 @@ import java.io.Serializable;
  */
 public class Image implements Serializable {
 
-    @SerializedName("id")
+    @SerializedName(AppConstants.ID)
     public String id;
 
-    @SerializedName("farm")
+    @SerializedName(AppConstants.FARM)
     public int farmId;
 
-    @SerializedName("server")
+    @SerializedName(AppConstants.SERVER)
     public String serverId;
 
-    @SerializedName("secret")
+    @SerializedName(AppConstants.SECRET)
     public String secret;
 
-    @SerializedName("owner")
+    @SerializedName(AppConstants.OWNER)
     public String ownerId;
 
-    @SerializedName("title")
+    @SerializedName(AppConstants.TITLE)
     public String title;
 
     public Image() {

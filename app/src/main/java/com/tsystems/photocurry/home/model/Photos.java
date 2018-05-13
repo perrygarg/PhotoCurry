@@ -1,6 +1,7 @@
 package com.tsystems.photocurry.home.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.tsystems.photocurry.common.constants.AppConstants;
 
 /**
  * Created by PerryGarg on 10-05-2018.
@@ -8,19 +9,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class Photos {
 
-    @SerializedName("page")
+    @SerializedName(AppConstants.PAGE)
     public int page;
 
-    @SerializedName("pages")
+    @SerializedName(AppConstants.PAGES)
     public int totalPages;
 
-    @SerializedName("perpage")
+    @SerializedName(AppConstants.PERPAGE)
     public int perpage;
 
-    @SerializedName("total")
+    @SerializedName(AppConstants.TOTAL)
     public int totalPhotos;
 
-    @SerializedName("photo")
+    @SerializedName(AppConstants.PHOTO)
     public Image[] images;
 
 }

@@ -53,6 +53,11 @@ public interface HomeContract {
          */
         void fetchPhotosWithQuery(int pageNumber, int photosPerPage, String queryText);
 
+        /**
+         * Method to store API response in Database. Should be called from View/Activity.
+         * @param images List of images to be stored in the database
+         */
+        void cacheResponseInDatabase(List<Image> images);
     }
 
 }

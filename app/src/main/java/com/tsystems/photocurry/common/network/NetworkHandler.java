@@ -10,7 +10,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Created by perry.garg on 30/01/17.
+ * Created by perry.garg on 10/05/18.
  */
 
 public class NetworkHandler {

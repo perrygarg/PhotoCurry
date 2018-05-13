@@ -8,7 +8,7 @@ import com.android.volley.Response;
 import java.util.Map;
 
 /**
- * Created by perry.garg on 30/01/17.
+ * Created by perry.garg on 10/05/18.
  */
 
 public class AppHttpClient {
@@ -42,7 +42,7 @@ public class AppHttpClient {
     {
         GsonRequest<T, K> gsonRequest = new GsonRequest<>(method, url, clsRequest, clsResponse, headers, responseListener, errorListener);
         gsonRequest.setRetryPolicy(new DefaultRetryPolicy(TIMEOUT, 0, 0.0F));
-        gsonRequest.setShouldCache(true); //TODO cache
+        gsonRequest.setShouldCache(true);
 
 
         //Add To Volley Request Queue

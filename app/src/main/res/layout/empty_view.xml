@@ -11,6 +11,6 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textSize="20sp"
-        android:text="No data avaialable"/>
+        android:text="@string/no_data_avaialable"/>
 
 </LinearLayout>

@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by Shubham Gupta on 01-04-2015.
+ * Created by PerryGarg on 01-04-2015.
  */
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {

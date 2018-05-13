@@ -14,6 +14,7 @@ import com.tsystems.photocurry.application.MyApplication;
 import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapter;
 import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapterListener;
 import com.tsystems.photocurry.common.constants.AppConstants;
+import com.tsystems.photocurry.common.listeners.OnItemClickListener;
 import com.tsystems.photocurry.common.util.AppLogs;
 import com.tsystems.photocurry.home.model.Image;
 
@@ -27,21 +28,34 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
     private List<Image> images;
     private Context mContext;
     private LayoutInflater layoutInflater = null;
+    private static OnItemClickListener itemClickListener = null;
 
-    public ImagesListAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, Context context, List<Image> images) {
+    public ImagesListAdapter(BaseRecyclerAdapterListener baseRecyclerAdapterListener, Context context, List<Image> images, OnItemClickListener itemClickListener) {
         super(baseRecyclerAdapterListener, true);
         mContext = context;
         this.images = images;
         layoutInflater = (LayoutInflater) MyApplication.appContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.itemClickListener = itemClickListener;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView thumbnail;
 
         public MyViewHolder(View view) {
             super(view);
             thumbnail = view.findViewById(R.id.thumbnail);
+            thumbnail.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view)
+        {
+            int position = (int) view.getTag();
+
+            if(itemClickListener != null)
+                itemClickListener.onItemClick(position, view);
+        }
+
     }
 
     @Override
@@ -75,7 +89,9 @@ public class ImagesListAdapter extends BaseRecyclerAdapter {
 
                 MyViewHolder myHolder = (MyViewHolder) holder;
 
-                Glide.with(mContext).load(image.getMediumSizeUrl())
+                myHolder.thumbnail.setTag(position);
+
+                Glide.with(mContext).load(image.getSmallSizeUrl())
                         .thumbnail(0.5f)
                         .crossFade()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)

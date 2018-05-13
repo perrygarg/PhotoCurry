@@ -1,7 +1,10 @@
 package com.tsystems.photocurry.home.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,25 +14,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.tsystems.photocurry.R;
 import com.tsystems.photocurry.common.activity.BaseActivity;
 import com.tsystems.photocurry.common.adapter.BaseRecyclerAdapterListener;
 import com.tsystems.photocurry.common.constants.AppConstants;
+import com.tsystems.photocurry.common.listeners.OnItemClickListener;
 import com.tsystems.photocurry.common.util.AppUtil;
 import com.tsystems.photocurry.common.util.UIUtil;
 import com.tsystems.photocurry.home.adapter.ImagesListAdapter;
 import com.tsystems.photocurry.home.contract.HomeContract;
 import com.tsystems.photocurry.home.model.Image;
 import com.tsystems.photocurry.home.presenter.HomePresenter;
+import com.tsystems.photocurry.viewimage.activity.ViewImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends BaseActivity
-        implements HomeContract.View, BaseRecyclerAdapterListener, View.OnClickListener {
+        implements HomeContract.View, BaseRecyclerAdapterListener, View.OnClickListener, OnItemClickListener {
 
     private String TAG = HomeActivity.class.getSimpleName();
     private RecyclerView imagesRecView;
@@ -43,7 +48,7 @@ public class HomeActivity extends BaseActivity
     private Button doneButton;
     private GridLayoutManager mLayoutManager;
     private int pageNumber = 1;
-    private int photosPerPage = 30;
+    private int photosPerPage = 30; //For best user experience, we can set this number dynamically on basis of screen size available on current device. Hardcoding to 30 for short term.
     private String queryText = "";
     private View emptyView, progressView;
 
@@ -80,7 +85,7 @@ public class HomeActivity extends BaseActivity
 
     private void setupRecyclerView() {
         images = new ArrayList<>();
-        imagesListAdapter = new ImagesListAdapter(this, this, images);
+        imagesListAdapter = new ImagesListAdapter(this, this, images, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), spanCount);
         this.mLayoutManager = (GridLayoutManager) mLayoutManager;
@@ -113,13 +118,13 @@ public class HomeActivity extends BaseActivity
 
     @Override
     public void showProgress(int processCode) {
-        if(progressDialog == null || !progressDialog.isShowing()) {
+//        if(progressDialog == null || !progressDialog.isShowing()) {
             if(isFirstPage()) {
-                progressDialog = UIUtil.showProgressDialog(this, "Please wait", "Fetching smile for you", true, false);
-                /*hideEmptyViewIfRequired();
-                progressView.setVisibility(View.VISIBLE);*/
+//                progressDialog = UIUtil.showProgressDialog(this, "Please wait", "Fetching smile for you", true, false);
+                hideEmptyViewIfRequired();
+                progressView.setVisibility(View.VISIBLE);
             }
-        }
+//        }
     }
 
     private void hideEmptyViewIfRequired() {
@@ -132,8 +137,8 @@ public class HomeActivity extends BaseActivity
 
     @Override
     public void hideProgress(int processCode) {
-        UIUtil.dismissDialog(progressDialog);
-//        progressView.setVisibility(View.GONE);
+//        UIUtil.dismissDialog(progressDialog);
+        progressView.setVisibility(View.GONE);
     }
 
     @Override
@@ -159,6 +164,8 @@ public class HomeActivity extends BaseActivity
         } else {
             emptyView.setVisibility(View.GONE);
         }
+
+        presenter.cacheResponseInDatabase(this.images);
     }
 
     @Override
@@ -243,4 +250,17 @@ public class HomeActivity extends BaseActivity
         }
     };
 
+    @Override
+    public void onItemClick(int position, View view) {
+        Image image = images.get(position);
+        navigateToViewImageActivity(position, (ImageView) view);
+    }
+
+    private void navigateToViewImageActivity(int position, ImageView view) {
+        Intent intent = new Intent(HomeActivity.this, ViewImageActivity.class);
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this, view, ViewCompat.getTransitionName(view));
+        intent.putExtra(AppConstants.IMAGE_URL, images.get(position).getMediumSizeUrl());
+        intent.putExtra(AppConstants.IMAGE_URL_MEDIUM, images.get(position).getSmallSizeUrl());
+        startActivity(intent, optionsCompat.toBundle());
+    }
 }

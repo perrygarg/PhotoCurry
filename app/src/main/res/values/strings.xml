@@ -1,30 +1,17 @@
 <resources>
     <string name="app_name">Photo Curry</string>
 
+    <string name="view_image">View Image Screen</string>
+
     <!-- Error Messages for Volley-->
     <string name="error_time_out">Seems the connection timed out</string>
     <string name="error_network">Please check your network</string>
     <string name="error_tech">Seems there\'s an error at our end</string>
 
-    <string name="Rs">\u20B9 %1$s</string>
 
-    <string name="train_name_or_number">Train Name or Number</string>
-    <string name="meal_station">Meal Station</string>
-    <string name="date">Date</string>
-    <string name="proceed">Proceed</string>
-    <string name="header_text">Some details please so that we can serve you better!!!</string>
-    <string name="progress_message">Collecting awesome things for you...</string>
-    <string name="progress_title">Hold your breath</string>
-    <string name="available_stations_message">Fetching available stations for selected train...</string>
-    <string name="live_api_check_message">Looking for yummy food for you...</string>
-    <string name="pnr_check_message">Looking up to your PNR...</string>
-    <string name="select_delivery_station">Select delivery station</string>
-    <string name="live_api_error">Live API didn\'t respond.</string>
-    <string name="train_doesnt_run">Selected train doesn\'t run today. Please check.</string>
-    <string name="order_impossible_error">Sorry, your order couldn\'t be processed. There must be atleast 60 minutes gap between order time and train arrival time.</string>
-    <string name="api_err_msg">Oops! A technical slip at our end. Please try again.</string>
-    <string name="invalid_pnr_msg">Please enter a valid upcoming PNR.</string>
-    <string name="time_error">Sorry, your order cannot be processed due to time constraints.</string>
-    <string name="enter_pnr_number">Enter PNR number (Feature Disabled)</string>
-    <string name="food_listing_progress_msg">Fetching some delicious food for you.</string>
+    <string name="invalid_query">Invalid Query</string>
+    <string name="type_your_favourite_word">Type your favourite word</string>
+    <string name="no_data_avaialable">No data avaialable</string>
+    <string name="allowed_search_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.tsystems.photocurry.home.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.tsystems.photocurry.common.constants.AppConstants;
 import com.tsystems.photocurry.common.model.MasterResponse;
 
 /**
@@ -9,7 +10,7 @@ import com.tsystems.photocurry.common.model.MasterResponse;
 
 public class SearchPhotoResponse extends MasterResponse {
 
-    @SerializedName("photos")
+    @SerializedName(AppConstants.PHOTOS)
     public Photos photos;
 
 }

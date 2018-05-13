@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
-        android:layout_margin="0dp"
-        android:scaleType="centerCrop" />
+        android:layout_margin="1dp"
+        android:scaleType="centerCrop"
+        android:transitionName="photocurrytransition"/>
 
 </com.tsystems.photocurry.common.util.SquareLayout>
