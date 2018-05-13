@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\projects\PhotoCurry\KhanaPeena.iml" filepath="C:\projects\PhotoCurry\KhanaPeena.iml" />
       <module fileurl="file://$PROJECT_DIR$/PhotoCurry.iml" filepath="$PROJECT_DIR$/PhotoCurry.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

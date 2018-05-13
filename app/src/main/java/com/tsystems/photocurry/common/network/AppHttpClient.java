@@ -42,7 +42,7 @@ public class AppHttpClient {
     {
         GsonRequest<T, K> gsonRequest = new GsonRequest<>(method, url, clsRequest, clsResponse, headers, responseListener, errorListener);
         gsonRequest.setRetryPolicy(new DefaultRetryPolicy(TIMEOUT, 0, 0.0F));
-        gsonRequest.setShouldCache(false); //TODO cache
+        gsonRequest.setShouldCache(true); //TODO cache
 
 
         //Add To Volley Request Queue
